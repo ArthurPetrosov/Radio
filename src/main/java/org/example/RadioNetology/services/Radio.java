@@ -2,61 +2,77 @@ package org.example.RadioNetology.services;
 
 public class Radio {
     private int currentStation;
-    private int volume;
+    private int currentVolume;
+    private int maxStation;
+
+    public Radio() {
+        maxStation = 9;
+    }
+
+    public Radio(int stationCount) {
+        maxStation = stationCount - 1;
+    }
+
+
+    public void next() {
+        if (currentStation != maxStation) {
+            currentStation++;
+        } else {
+            currentStation = 0;
+        }
+    }
+
+    public void prev() {
+        if (currentStation != 0) {
+            currentStation--;
+        } else {
+            currentStation = maxStation;
+        }
+    }
+
+    public void nextVolume() {
+        if (currentVolume != 100) {
+            currentVolume++;
+        } else {
+            return;
+        }
+    }
+
+    public void prevVolume() {
+        if (currentVolume != 0) {
+            currentVolume--;
+        } else {
+            return;
+        }
+    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+    public int getCurrentVolume() {
+
+        return currentVolume;
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation < 0) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (currentStation > maxStation) {
             return;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = currentStation;
     }
 
-    public void next() {
-        if (currentStation == 9) {
-            currentStation = 0;
-        } else {
-            currentStation++;
-        }
-    }
 
-    public void prev() {
-        if (currentStation == 0) {
-            currentStation = 9;
-        } else {
-            currentStation--;
-        }
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int newVolume) {
-        if (newVolume < 0) {
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < 0) {
             return;
         }
-        if (newVolume > 100) {
+        if (currentVolume > 100) {
             return;
         }
-        volume = newVolume;
-    }
-
-    public void upVolume() {
-        if (volume < 100) {
-            volume++;
-        }
-    }
-
-    public void downVolume() {
-        if (volume > 0) {
-            volume--;
-        }
+        this.currentVolume = currentVolume;
     }
 }
