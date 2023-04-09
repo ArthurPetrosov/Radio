@@ -1,62 +1,105 @@
 package org.example.RadioNetology.services;
 
 public class Radio {
-    private int currentStation;
-    private int volume;
+    private int currentStation = 10;
+    private int maxStation = 10;
+    private int minStation = 0;
+
+    private int currentVolume;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+
+    public Radio() {
+    }
+
+    public Radio(int currentStation) {
+        this.currentStation = currentStation;
+    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
-            return;
+    public void setCurrentStation(int currentStation) {
+        if (currentStation > maxStation) {
+            currentStation = minStation;
         }
-        if (newCurrentStation > 9) {
-            return;
+        if (currentStation < minStation) {
+            currentStation = maxStation;
         }
-        currentStation = newCurrentStation;
+        this.currentStation = currentStation;
     }
 
+
     public void next() {
-        if (currentStation == 9) {
-            currentStation = 0;
+        if (currentStation >= maxStation) {
+            setCurrentStation(minStation);
         } else {
-            currentStation++;
+            setCurrentStation(currentStation + 1);
         }
     }
 
     public void prev() {
-        if (currentStation == 0) {
-            currentStation = 9;
+        if (currentStation <= minStation) {
+            setCurrentStation(maxStation);
         } else {
-            currentStation--;
+            setCurrentStation(currentStation - 1);
         }
     }
 
-    public int getVolume() {
-        return volume;
+
+    public int getMaxStation() {
+        return maxStation;
     }
 
-    public void setVolume(int newVolume) {
-        if (newVolume < 0) {
-            return;
-        }
-        if (newVolume > 100) {
-            return;
-        }
-        volume = newVolume;
+    public void setMaxStation(int maxStation) {
+        this.maxStation = maxStation;
     }
 
-    public void upVolume() {
-        if (volume < 100) {
-            volume++;
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public void setMinStation(int minStation) {
+        this.minStation = minStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
+            currentVolume = minVolume;
         }
+        if (currentVolume < minVolume) {
+            currentVolume = maxVolume;
+        }
+        this.currentVolume = currentVolume;
+
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(int maxVolume) {
+        this.maxVolume = maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public void setMinVolume(int minVolume) {
+        this.minVolume = minVolume;
+    }
+
+    public void upperVolume() {
+        setCurrentVolume(currentVolume + 1);
     }
 
     public void downVolume() {
-        if (volume > 0) {
-            volume--;
-        }
+        setCurrentVolume(currentVolume - 1);
     }
 }
