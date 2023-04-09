@@ -205,6 +205,7 @@ public class RadioTest {
         int actual = rad.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void shouldSetMaxStationCount() {
         Radio radio = new Radio(10);
